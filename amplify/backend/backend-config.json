@@ -1,1 +1,8 @@
-{}
+{
+  "storage": {
+    "dynamoffbc75dd": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
+}
