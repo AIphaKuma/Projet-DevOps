@@ -42,7 +42,19 @@
       "DeploymentBucketName": "amplify-projetdevops-sasoenv-123012-deployment",
       "UnauthRoleName": "amplify-projetdevops-sasoenv-123012-unauthRole",
       "StackName": "amplify-projetdevops-sasoenv-123012",
-      "StackId": "arn:aws:cloudformation:eu-west-1:030458456278:stack/amplify-projetdevops-sasoenv-123012/cf24f680-9d98-11ee-89ff-0207746c5627",
+      "StackId": "arn:aws:cloudformation:eu-west-1:030458456278:stack/amplify-projetdevops-sasoenv-123012/cf24f680-9d98-11ee-89ff-0207746c5627"
+    }
+  },
+  "kevenv": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-projetdevops-kevenv-124701-authRole",
+      "UnauthRoleArn": "arn:aws:iam::030458456278:role/amplify-projetdevops-kevenv-124701-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::030458456278:role/amplify-projetdevops-kevenv-124701-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-projetdevops-kevenv-124701-deployment",
+      "UnauthRoleName": "amplify-projetdevops-kevenv-124701-unauthRole",
+      "StackName": "amplify-projetdevops-kevenv-124701",
+      "StackId": "arn:aws:cloudformation:eu-west-1:030458456278:stack/amplify-projetdevops-kevenv-124701/28aecc60-9d9b-11ee-a9c5-02864942b6b3",
       "AmplifyAppId": "djltmuvzksfh"
     }
   }
