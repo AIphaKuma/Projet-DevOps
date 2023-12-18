@@ -63,6 +63,24 @@
       "service": "Lambda"
     }
   },
+  "parameters": {
+    "AMPLIFY_function_getUsers_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUsers"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUsers_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUsers"
+        }
+      ]
+    }
+  },
   "storage": {
     "dynamoffbc75dd": {
       "providerPlugin": "awscloudformation",
