@@ -45,4 +45,4 @@ amplifytools.xcconfig
 **.sample
 #amplify-do-not-edit-end
 
-team-provider-info.json
+amplify/team-provider-info.json
