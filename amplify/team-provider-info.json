@@ -44,6 +44,11 @@
       "StackName": "amplify-projetdevops-sasoenv-123012",
       "StackId": "arn:aws:cloudformation:eu-west-1:030458456278:stack/amplify-projetdevops-sasoenv-123012/cf24f680-9d98-11ee-89ff-0207746c5627",
       "AmplifyAppId": "djltmuvzksfh"
+    },
+    "categories": {
+      "storage": {
+        "dynamoffbc75dd": {}
+      }
     }
   }
 }
