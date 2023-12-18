@@ -25,7 +25,8 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
-    },
+    }
+  },
   "api": {
     "apib13d1abb": {
       "dependsOn": [
