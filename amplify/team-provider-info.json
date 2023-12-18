@@ -29,7 +29,13 @@
         "dynamoffbc75dd": {}
       },
       "function": {
-        "getUsers": {}
+        "getUsers": {
+          "deploymentBucketName": "amplify-projetdevops-env-113214-deployment",
+          "s3Key": "amplify-builds/getUsers-4d78366d37517376476f-build.zip"
+        }
+      },
+      "api": {
+        "apib13d1abb": {}
       }
     }
   },
