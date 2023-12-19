@@ -1,4 +1,6 @@
 import './App.css'
+
+import React from 'react'
 import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 function SignUp() {
