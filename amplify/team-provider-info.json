@@ -74,6 +74,13 @@
     "categories": {
       "storage": {
         "dynamoffbc75dd": {}
+      },
+      "auth": {
+        "projetdevopsd22dff06": {},
+        "projetdevops7098afb4": {}
+      },
+      "function": {
+        "getUsers": {}
       }
     }
   }
