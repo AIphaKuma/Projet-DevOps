@@ -10,6 +10,18 @@
       "StackName": "amplify-projetdevops-dev-111754",
       "StackId": "arn:aws:cloudformation:eu-west-1:030458456278:stack/amplify-projetdevops-dev-111754/b63ad590-9d8e-11ee-bfc0-062acef719ed",
       "AmplifyAppId": "djltmuvzksfh"
+    },
+    "categories": {
+      "auth": {
+        "projetdevops7098afb4": {},
+        "projetdevopsd22dff06": {}
+      },
+      "function": {
+        "getUsers": {
+          "deploymentBucketName": "amplify-projetdevops-dev-111754-deployment",
+          "s3Key": "amplify-builds/getUsers-4d78366d37517376476f-build.zip"
+        }
+      }
     }
   },
   "env": {
@@ -36,6 +48,9 @@
       },
       "api": {
         "apib13d1abb": {}
+      },
+      "auth": {
+        "projetdevops7098afb4": {}
       }
     }
   },
