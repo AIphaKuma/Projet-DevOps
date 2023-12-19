@@ -1,7 +1,30 @@
 import './App.css'
-
+import { useState, useEffect } from 'react';
+import { Auth } from 'aws-amplify';
 function SignUp() {
-  return (
+    const [lastname, setLastname] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const signUpResponse = await Auth.signUp({
+                lastname,
+                firstname,
+                username: email,
+                password,
+                // ...autres attributs
+            });
+            console.log('Réponse de l\'inscription:', signUpResponse);
+            // Gérer la réponse, par exemple rediriger vers la page de connexion
+        } catch (error) {
+            console.error('Erreur lors de l\'inscription:', error);
+        }
+    };
+    return (
     <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -9,7 +32,7 @@ function SignUp() {
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
                         Inscription
                     </h1>
-                    <form className="space-y-4 md:space-y-6" action="#">
+                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         <div className="flex gap-x-5 justify-between">
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>

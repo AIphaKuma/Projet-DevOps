@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import './App.css';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+
 
 function App() {
     return (
