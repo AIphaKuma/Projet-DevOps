@@ -1,15 +1,21 @@
-import './App.css'
-
-import SignIn from './SignIn.jsx'
-import SignUp from './SignUp.jsx'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import './App.css';
 
 function App() {
-  return (
-    <>
-        <SignIn />
-        <SignUp />
-    </>
-  )
+    return (
+        <Router>
+            <nav>
+                <Link to="/signin">Sign In</Link>
+                <Link to="/signup">Sign Up</Link>
+            </nav>
+            <Routes>
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
+            </Routes>
+        </Router>
+    );
 }
 
-export default App
+export default App;
