@@ -64,6 +64,11 @@ function Profile() {
                                 </div>
                             </div>
                         </div>
+                        <div className="flex items-center space-x-4">
+                            <button type="button" className="w-full text-white bg-blue-500 hover:bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mb-8">
+                                Modifier
+                            </button>
+                        </div>
                     </div>
                     </>
                  ) : (
