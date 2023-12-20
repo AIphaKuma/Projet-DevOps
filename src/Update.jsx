@@ -12,8 +12,8 @@ function Update() {
                     <form action="#">
                         <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                             <div className="sm:col-span-2">
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Choisir un fichier</label>
-                                <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file"></input>
+                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Avatar</label>
+                                <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 py-2" id="file_input" type="file"></input>
                             </div>
                             <div className="sm:col-span-2">
                                 <label for="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
@@ -33,7 +33,7 @@ function Update() {
                             </div>
                         </div>
                         <div className="flex items-center space-x-4">
-                            <button type="button" className="text-green-600 inline-flex items-center hover:text-white border border-green-600 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900">
+                            <button type="button" className="w-full text-white bg-blue-500 hover:bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mt-4">
                                 Modifier
                             </button>
                         </div>

@@ -19,7 +19,11 @@
       "function": {
         "getUsers": {
           "deploymentBucketName": "amplify-projetdevops-dev-111754-deployment",
-          "s3Key": "amplify-builds/getUsers-4d78366d37517376476f-build.zip"
+          "s3Key": "amplify-builds/getUsers-707258577877697a7948-build.zip"
+        },
+        "projetdevops7098afb4PostConfirmation": {
+          "deploymentBucketName": "amplify-projetdevops-dev-111754-deployment",
+          "s3Key": "amplify-builds/projetdevops7098afb4PostConfirmation-30624d5358314e655178-build.zip"
         }
       }
     }
@@ -90,18 +94,31 @@
       "UnauthRoleName": "amplify-projetdevops-kevenv-124701-unauthRole",
       "StackName": "amplify-projetdevops-kevenv-124701",
       "StackId": "arn:aws:cloudformation:eu-west-1:030458456278:stack/amplify-projetdevops-kevenv-124701/28aecc60-9d9b-11ee-a9c5-02864942b6b3",
-      "AmplifyAppId": "djltmuvzksfh"
+      "AmplifyAppId": "djltmuvzksfh",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-projetdevops-kevenv-124701-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "storage": {
-        "dynamoffbc75dd": {}
+        "dynamoffbc75dd": {},
+        "usersbis": {}
       },
       "auth": {
         "projetdevopsd22dff06": {},
         "projetdevops7098afb4": {}
       },
       "function": {
-        "getUsers": {}
+        "getUsers": {
+          "deploymentBucketName": "amplify-projetdevops-kevenv-124701-deployment",
+          "s3Key": "amplify-builds/getUsers-707258577877697a7948-build.zip"
+        },
+        "projetdevops7098afb4PostConfirmation": {
+          "deploymentBucketName": "amplify-projetdevops-kevenv-124701-deployment",
+          "s3Key": "amplify-builds/projetdevops7098afb4PostConfirmation-30624d5358314e655178-build.zip"
+        },
+        "usersbis": {}
+      },
+      "api": {
+        "apib7ad3daa": {}
       }
     }
   }
