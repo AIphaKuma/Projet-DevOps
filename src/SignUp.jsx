@@ -1,29 +1,45 @@
 import './App.css'
+
+import React from 'react'
 import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
+import {useNavigate} from "react-router-dom";
+
 function SignUp() {
     const [lastname, setLastname] = useState('');
     const [firstname, setFirstname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isSignedUp, setIsSignedUp] = useState(false);
 
+    const navigate = useNavigate(); // Initialisation de useNavigate
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!email) {
+            console.error('Le nom d\'utilisateur (e-mail) ne peut pas être vide', email);
+            return;
+        }
         try {
             const signUpResponse = await Auth.signUp({
-                lastname,
-                firstname,
                 username: email,
                 password,
+                attributes: {
+                    family_name: lastname,
+                    name: firstname,
+                    // other custom attributes
+                },
                 // ...autres attributs
             });
             console.log('Réponse de l\'inscription:', signUpResponse);
+            setIsSignedUp(true);
+            navigate('/confirmsignup');
             // Gérer la réponse, par exemple rediriger vers la page de connexion
         } catch (error) {
             console.error('Erreur lors de l\'inscription:', error);
         }
     };
+
     return (
     <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -35,21 +51,22 @@ function SignUp() {
                     <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         <div className="flex gap-x-5 justify-between">
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
-                                <input type="name" name="lastname" id="lastname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required=""></input>
+                                <label htmlFor="lastname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+                                <input type="text" name="lastname" id="lastname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" onChange={(e) => setLastname(e.target.value)} required=""></input>
                             </div>
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prénom</label>
-                                <input type="name" name="firstname" id="firstname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required=""></input>
+                                <label htmlFor="firstname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prénom</label>
+                                <input type="text" name="firstname" id="firstname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" onChange={(e) => setFirstname(e.target.value)} required=""></input>
                             </div>
                         </div>
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required=""></input>
+                            <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" onChange={(e) => setEmail(e.target.value)}  // Ajoutez cette ligne
+                                   required ></input>
                         </div>
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""></input>
+                            <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={(e) => setPassword(e.target.value)}  required></input>
                         </div>
                         <div>
                             <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmer le mot de passe</label>
