@@ -14,9 +14,7 @@ function SignIn() {
         event.preventDefault();
         try {
             const signInResponse = await Auth.signIn(email, password);
-            console.log('Réponse de la connexion:', signInResponse);
             navigate('/profile');
-            // Rediriger l'utilisateur après la connexion réussie
         } catch (error) {
             console.error('Erreur lors de la connexion:', error);
         }
