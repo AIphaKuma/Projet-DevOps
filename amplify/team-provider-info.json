@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-projetdevops-dev-111754-unauthRole",
       "StackName": "amplify-projetdevops-dev-111754",
       "StackId": "arn:aws:cloudformation:eu-west-1:030458456278:stack/amplify-projetdevops-dev-111754/b63ad590-9d8e-11ee-bfc0-062acef719ed",
-      "AmplifyAppId": "djltmuvzksfh"
+      "AmplifyAppId": "djltmuvzksfh",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-projetdevops-dev-111754-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
@@ -19,8 +20,18 @@
       "function": {
         "getUsers": {
           "deploymentBucketName": "amplify-projetdevops-dev-111754-deployment",
-          "s3Key": "amplify-builds/getUsers-4d78366d37517376476f-build.zip"
-        }
+          "s3Key": "amplify-builds/getUsers-707258577877697a7948-build.zip"
+        },
+        "projetdevops7098afb4PostConfirmation": {
+          "deploymentBucketName": "amplify-projetdevops-dev-111754-deployment",
+          "s3Key": "amplify-builds/projetdevops7098afb4PostConfirmation-30624d5358314e655178-build.zip"
+        },
+        "dynamoffbc75dd": {},
+        "usersbis": {}
+      },
+      "storage": {
+        "dynamoffbc75dd": {},
+        "usersbis": {}
       }
     }
   },
@@ -102,6 +113,44 @@
       },
       "function": {
         "getUsers": {}
+      }
+    }
+  },
+  "theoenv": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-projetdevops-theoenv-195202-authRole",
+      "UnauthRoleArn": "arn:aws:iam::030458456278:role/amplify-projetdevops-theoenv-195202-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::030458456278:role/amplify-projetdevops-theoenv-195202-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-projetdevops-theoenv-195202-deployment",
+      "UnauthRoleName": "amplify-projetdevops-theoenv-195202-unauthRole",
+      "StackName": "amplify-projetdevops-theoenv-195202",
+      "StackId": "arn:aws:cloudformation:eu-west-1:030458456278:stack/amplify-projetdevops-theoenv-195202/ddbe5e80-9f68-11ee-8469-02c4122697db",
+      "AmplifyAppId": "djltmuvzksfh",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-projetdevops-theoenv-195202-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "projetdevops7098afb4": {}
+      },
+      "function": {
+        "getUsers": {
+          "deploymentBucketName": "amplify-projetdevops-theoenv-195202-deployment",
+          "s3Key": "amplify-builds/getUsers-707258577877697a7948-build.zip"
+        },
+        "projetdevops7098afb4PostConfirmation": {
+          "deploymentBucketName": "amplify-projetdevops-theoenv-195202-deployment",
+          "s3Key": "amplify-builds/projetdevops7098afb4PostConfirmation-30624d5358314e655178-build.zip"
+        },
+        "dynamoffbc75dd": {},
+        "usersbis": {}
+      },
+      "api": {
+        "apib7ad3daa": {}
+      },
+      "storage": {
+        "dynamoffbc75dd": {},
+        "usersbis": {}
       }
     }
   }
