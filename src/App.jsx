@@ -6,11 +6,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import './App.css';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 import ConfirmSignUp from "./ConfirmAuth.jsx";
 import Profile from './Profile';
 import Update from './Update';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 
 function App() {
     return (

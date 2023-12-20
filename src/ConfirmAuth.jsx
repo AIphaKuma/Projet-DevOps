@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
+import {useNavigate} from "react-router-dom";
 
 function ConfirmSignUp() {
     const [email, setEmail] = useState('');
@@ -7,11 +8,15 @@ function ConfirmSignUp() {
     const [error, setError] = useState('');
     const [confirmed, setConfirmed] = useState(false);
 
+    const navigate = useNavigate(); // Initialisation de useNavigate
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             await Auth.confirmSignUp(email, code);
             setConfirmed(true);
+            navigate('/profile');
             // Redirigez l'utilisateur ou affichez un message de succès
         } catch (error) {
             setError(error.message);
