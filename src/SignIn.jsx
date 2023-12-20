@@ -27,7 +27,7 @@ function SignIn() {
                   <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
                       Connexion
                   </h1>
-                  <form className="space-y-4 md:space-y-6" action="#">
+                  <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                       <div>
                           <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                           <input type="text" name="email" id="email"
