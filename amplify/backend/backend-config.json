@@ -18,9 +18,19 @@
   "auth": {
     "projetdevops7098afb4": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "projetdevops7098afb4PostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
+        "mfaConfiguration": "OPTIONAL",
         "mfaTypes": [
           "SMS"
         ],
@@ -64,6 +74,22 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "projetdevops7098afb4PostConfirmation": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "usersbis"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -82,10 +108,30 @@
           "resourceName": "getUsers"
         }
       ]
+    },
+    "AMPLIFY_function_projetdevops7098afb4PostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "projetdevops7098afb4PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_projetdevops7098afb4PostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "projetdevops7098afb4PostConfirmation"
+        }
+      ]
     }
   },
   "storage": {
     "dynamoffbc75dd": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "usersbis": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }

@@ -1,20 +1,21 @@
 import './App.css'
 import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
-
-
+import {useNavigate} from "react-router-dom";
 import React from 'react'
 
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Initialisation de useNavigate
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const signInResponse = await Auth.signIn(email, password);
             console.log('Réponse de la connexion:', signInResponse);
-
+            navigate('/profile');
             // Rediriger l'utilisateur après la connexion réussie
         } catch (error) {
             console.error('Erreur lors de la connexion:', error);
