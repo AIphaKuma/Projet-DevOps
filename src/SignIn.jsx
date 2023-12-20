@@ -14,6 +14,7 @@ function SignIn() {
         try {
             const signInResponse = await Auth.signIn(email, password);
             console.log('Réponse de la connexion:', signInResponse);
+
             // Rediriger l'utilisateur après la connexion réussie
         } catch (error) {
             console.error('Erreur lors de la connexion:', error);
@@ -46,7 +47,7 @@ function SignIn() {
                       </div>
                       <button type="submit" className="w-full text-white bg-blue-500 hover:bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Se connecter</button>
                       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                      Vous n'avez pas encore de compte ? <a href="/signup" class="font-medium text-blue-500 hover:text-blue-700">S'inscrire</a>
+                      Vous n'avez pas encore de compte ? <a href="/signup" className="font-medium text-blue-500 hover:text-blue-700">S'inscrire</a>
                       </p>
                   </form>
               </div>
