@@ -4,6 +4,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import {useNavigate} from "react-router-dom";
+import ToastComponent from './components/ToastComponent';
 
 import Footer from './Footer';
 
@@ -13,8 +14,13 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSignedUp, setIsSignedUp] = useState(false);
+    const [error, setError] = useState(null);
 
-    const navigate = useNavigate(); // Initialisation de useNavigate
+    const navigate = useNavigate();
+
+    const closeToast = () => {
+        setError(null);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -29,16 +35,17 @@ function SignUp() {
                 attributes: {
                     family_name: lastname,
                     name: firstname,
-                    // other custom attributes
                 },
-                // ...autres attributs
             });
             console.log('Réponse de l\'inscription:', signUpResponse);
             setIsSignedUp(true);
             navigate('/confirmsignup');
-            // Gérer la réponse, par exemple rediriger vers la page de connexion
         } catch (error) {
             console.error('Erreur lors de l\'inscription:', error);
+            setError('Erreur lors de l\'inscription: ' + error.message);
+            setTimeout(() => {
+                closeToast();
+            }, 2500);
         }
     };
 
@@ -90,6 +97,7 @@ function SignUp() {
                     </div>
                 </div>
             </div>
+            { error && <ToastComponent message={error} onClose={closeToast} error={true} /> }
         </section>
     )
 }
