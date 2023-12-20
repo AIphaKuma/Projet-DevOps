@@ -40,17 +40,17 @@
       "storage": {
         "dynamoffbc75dd": {}
       },
+      "auth": {
+        "projetdevops7098afb4": {}
+      },
       "function": {
         "getUsers": {
           "deploymentBucketName": "amplify-projetdevops-env-113214-deployment",
-          "s3Key": "amplify-builds/getUsers-6b37776f4e654e45736d-build.zip"
+          "s3Key": "amplify-builds/getUsers-707258577877697a7948-build.zip"
         }
       },
       "api": {
-        "apib13d1abb": {}
-      },
-      "auth": {
-        "projetdevops7098afb4": {}
+        "apib7ad3daa": {}
       }
     }
   },
