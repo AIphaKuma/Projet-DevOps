@@ -16,13 +16,17 @@
     "s3Key": {
       "Type": "String"
     },
-    "storagedynamoffbc75ddName": {
+    "storageusersbisName": {
       "Type": "String",
-      "Default": "storagedynamoffbc75ddName"
+      "Default": "storageusersbisName"
     },
-    "storagedynamoffbc75ddArn": {
+    "storageusersbisArn": {
       "Type": "String",
-      "Default": "storagedynamoffbc75ddArn"
+      "Default": "storageusersbisArn"
+    },
+    "storageusersbisStreamArn": {
+      "Type": "String",
+      "Default": "storageusersbisStreamArn"
     }
   },
   "Conditions": {
@@ -55,12 +59,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "getUsers",
+            "projetdevopsd832ff70",
             {
               "Fn::Join": [
                 "",
                 [
-                  "getUsers",
+                  "projetdevopsd832ff70",
                   "-",
                   {
                     "Ref": "env"
@@ -77,6 +81,15 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "STORAGE_USERSBIS_NAME": {
+              "Ref": "storageusersbisName"
+            },
+            "STORAGE_USERSBIS_ARN": {
+              "Ref": "storageusersbisArn"
+            },
+            "STORAGE_USERSBIS_STREAMARN": {
+              "Ref": "storageusersbisStreamArn"
             }
           }
         },
@@ -97,12 +110,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "projetdevopsLambdaRole4de787b5",
+            "projetdevopsLambdaRole85815a8c",
             {
               "Fn::Join": [
                 "",
                 [
-                  "projetdevopsLambdaRole4de787b5",
+                  "projetdevopsLambdaRole85815a8c",
                   "-",
                   {
                     "Ref": "env"
@@ -182,14 +195,61 @@
               ],
               "Resource": [
                 {
-                  "Ref": "storagedynamoffbc75ddArn"
+                  "Ref": "storageusersbisArn"
                 },
                 {
                   "Fn::Join": [
                     "/",
                     [
                       {
-                        "Ref": "storagedynamoffbc75ddArn"
+                        "Ref": "storageusersbisArn"
+                      },
+                      "index/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:PartiQLSelect"
+              ],
+              "Resource": [
+                {
+                  "Ref": "storageusersbisArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storageusersbisArn"
                       },
                       "index/*"
                     ]

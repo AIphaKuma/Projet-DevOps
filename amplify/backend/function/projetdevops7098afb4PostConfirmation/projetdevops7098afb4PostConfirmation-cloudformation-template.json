@@ -2,27 +2,59 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.10.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
-    "CloudWatchRule": {
+    "GROUP": {
       "Type": "String",
-      "Default": "NONE",
-      "Description": " Schedule Expression"
+      "Default": ""
     },
-    "deploymentBucketName": {
-      "Type": "String"
+    "modules": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Comma-delimited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
+    },
+    "resourceName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "trigger": {
+      "Type": "String",
+      "Default": "true"
+    },
+    "functionName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "roleName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentResource": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentStack": {
+      "Type": "String",
+      "Default": ""
     },
     "env": {
+      "Type": "String"
+    },
+    "deploymentBucketName": {
       "Type": "String"
     },
     "s3Key": {
       "Type": "String"
     },
-    "storagedynamoffbc75ddName": {
+    "storageusersbisName": {
       "Type": "String",
-      "Default": "storagedynamoffbc75ddName"
+      "Default": "storageusersbisName"
     },
-    "storagedynamoffbc75ddArn": {
+    "storageusersbisArn": {
       "Type": "String",
-      "Default": "storagedynamoffbc75ddArn"
+      "Default": "storageusersbisArn"
+    },
+    "storageusersbisStreamArn": {
+      "Type": "String",
+      "Default": "storageusersbisStreamArn"
     }
   },
   "Conditions": {
@@ -43,24 +75,16 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
-        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "getUsers",
+            "projetdevops7098afb4PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "getUsers",
+                  "projetdevops7098afb4PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -75,8 +99,23 @@
             "ENV": {
               "Ref": "env"
             },
+            "MODULES": {
+              "Ref": "modules"
+            },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "GROUP": {
+              "Ref": "GROUP"
+            },
+            "STORAGE_USERSBIS_NAME": {
+              "Ref": "storageusersbisName"
+            },
+            "STORAGE_USERSBIS_ARN": {
+              "Ref": "storageusersbisArn"
+            },
+            "STORAGE_USERSBIS_STREAMARN": {
+              "Ref": "storageusersbisStreamArn"
             }
           }
         },
@@ -87,8 +126,15 @@
           ]
         },
         "Runtime": "nodejs18.x",
-        "Layers": [],
-        "Timeout": 25
+        "Timeout": 25,
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        }
       }
     },
     "LambdaExecutionRole": {
@@ -97,12 +143,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "projetdevopsLambdaRole4de787b5",
+            "projetdevops7098afb4PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "projetdevopsLambdaRole4de787b5",
+                  "projetdevops7098afb4PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -168,28 +214,56 @@
                   }
                 ]
               }
-            },
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
             {
               "Effect": "Allow",
               "Action": [
-                "dynamodb:DescribeTable",
-                "dynamodb:GetItem",
-                "dynamodb:Query",
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PartiQLInsert",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
                 "dynamodb:Scan",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem"
+                "dynamodb:Query",
+                "dynamodb:PartiQLSelect",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:PartiQLUpdate",
+                "dynamodb:Delete*",
+                "dynamodb:PartiQLDelete"
               ],
               "Resource": [
                 {
-                  "Ref": "storagedynamoffbc75ddArn"
+                  "Ref": "storageusersbisArn"
                 },
                 {
                   "Fn::Join": [
                     "/",
                     [
                       {
-                        "Ref": "storagedynamoffbc75ddArn"
+                        "Ref": "storageusersbisArn"
                       },
                       "index/*"
                     ]
@@ -216,11 +290,6 @@
         ]
       }
     },
-    "Region": {
-      "Value": {
-        "Ref": "AWS::Region"
-      }
-    },
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
@@ -232,6 +301,11 @@
           "LambdaExecutionRole",
           "Arn"
         ]
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
       }
     }
   }
