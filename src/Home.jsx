@@ -29,7 +29,7 @@ function Home() {
                     </div>
                 </div>
                 <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                    <img src="map.png" alt="mockup"/>
+                    <img src="src/assets/Map.png" alt="mockup"/>
                 </div>                
             </div>
         </section>

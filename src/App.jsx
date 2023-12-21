@@ -29,7 +29,6 @@ function App() {
             }
         };
 
-
         checkAuthStatus();
 
         const authListener = Hub.listen('auth', ({ payload: { event } }) => {
@@ -48,14 +47,9 @@ function App() {
         };
     }, [isLogged]);
 
-    // const PrivateRoute = ({ element, path }) => {
-    //     return isLogged ? element : <Navigate to="/" />;
-    // };
-
     return (
         <Router>
-            <Navbar />
-            {/* <Routes> */}
+            <Navbar />  
             <Routes>
                 <Route path="/" element={<><Home /><Footer /></>} />
                 <Route path="/signin" element={<SignIn />} />
@@ -64,20 +58,6 @@ function App() {
                 <Route path="/profile" element={!isLogged ? <Navigate to="/" /> : <Profile />} />
                 <Route path="/update" element={!isLogged ? <Navigate to="/" /> : <Update />} />
             </Routes>
-
-                {/* <Route
-                    path="/confirmsignup"
-                    element={<PrivateRoute element={<ConfirmSignUp />} path="/confirmsignup" />}
-                />
-                <Route
-                    path="/profile"
-                    element={<PrivateRoute element={<Profile />} path="/profile" />}
-                />
-                <Route
-                    path="/update"
-                    element={<PrivateRoute element={<Update />} path="/update" />}
-                /> */}
-            {/* </Routes> */}
         </Router>
     );
 }
