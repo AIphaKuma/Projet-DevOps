@@ -2,8 +2,6 @@ const awsServerlessExpress = require('aws-serverless-express');
 const app = require('./app');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
-
 /**
  * @type {import('http').Server}
  */
@@ -15,39 +13,26 @@ const server = awsServerlessExpress.createServer(app);
 exports.handler = async (event) => {
   console.log("Evénement reçu:", JSON.stringify(event, null, 2));
 
+  // Bouclez sur chaque enregistrement d'événement S3
   for (const record of event.Records) {
     const bucket = record.s3.bucket.name;
     const key = record.s3.object.key;
+    const imageData = Buffer.from(record.body.image, 'base64');
+
 
     try {
-      // Télécharger le fichier dans S3
-      const uploadParams = {
+      const params = {
         Bucket: bucket,
         Key: key,
-        Body: record.body
+        Body: 'Hello World!'
       };
-      await s3.putObject(uploadParams).promise();
+
+      await s3.putObject(params).promise();
       console.log('Upload réussi');
-
-      // Construire l'URL de l'image
-      const imageUrl = `https://${bucket}.s3.amazonaws.com/${key}`;
-
-      // Mettre à jour DynamoDB avec l'URL de l'image
-      const userId = event.request.userAttributes.sub // Récupérer l'ID de l'utilisateur
-      const updateParams = {
-        TableName: 'usersbis-env',
-        Key: { 'id': userId },
-        UpdateExpression: 'set imageUrl = :url',
-        ExpressionAttributeValues: {
-          ':url': imageUrl
-        },
-        ReturnValues: 'UPDATED_NEW'
-      };
-      await dynamoDB.update(updateParams).promise();
-      console.log('Mise à jour de DynamoDB réussie');
-
+      // Retourner une réponse de succès ici
     } catch (err) {
-      console.error('Erreur lors de l\'upload ou de la mise à jour DynamoDB:', err);
+      console.error('Erreur lors de l\'upload:', err);
+      // Retourner une réponse d'erreur ici
     }
   }
 };
