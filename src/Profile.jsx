@@ -1,6 +1,7 @@
 import './App.css'
 import React, { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
+import ToastComponent from "./components/ToastComponent";
 
 
 function Profile() {
@@ -22,6 +23,7 @@ function Profile() {
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
+        <ToastComponent />
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div className="w-full bg-white max-w-md mx-auto md:max-w-2xl min-w-0 break-words rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 {user ? (
