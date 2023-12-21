@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "getUsers"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "projetdevopsd832ff70"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -90,6 +98,22 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "projetdevopsd832ff70": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "usersbis"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -122,6 +146,22 @@
         {
           "category": "function",
           "resourceName": "projetdevops7098afb4PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_projetdevopsd832ff70_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "projetdevopsd832ff70"
+        }
+      ]
+    },
+    "AMPLIFY_function_projetdevopsd832ff70_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "projetdevopsd832ff70"
         }
       ]
     }

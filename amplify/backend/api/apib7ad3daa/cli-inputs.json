@@ -7,6 +7,16 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/updates": {
+      "name": "/updates",
+      "lambdaFunction": "projetdevopsd832ff70",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create"
+        ]
+      }
     }
   }
 }
