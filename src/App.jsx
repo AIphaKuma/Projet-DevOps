@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Auth, Hub } from 'aws-amplify';
 
-import Home from './Home';
+import HomePage from './HomePage';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Profile from './Profile';
 import ConfirmSignUp from "./ConfirmAuth.jsx";
 import Update from './Update';
 import Navbar from './Navbar';
-import Footer from './Footer';
 
 function App() {
     const [isLogged, setIsLogged] = useState(false);
@@ -51,12 +50,12 @@ function App() {
         <Router>
             <Navbar />  
             <Routes>
-                <Route path="/" element={<><Home /><Footer /></>} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
-                <Route path="/confirmsignup" element={!isLogged ? <Navigate to="/" /> : <ConfirmSignUp />} />
-                <Route path="/profile" element={!isLogged ? <Navigate to="/" /> : <Profile />} />
-                <Route path="/update" element={!isLogged ? <Navigate to="/" /> : <Update />} />
+                <Route path="/confirmsignup" element={!isLogged ? <HomePage /> : <ConfirmSignUp />} />
+                <Route path="/profile" element={!isLogged ? <HomePage /> : <Profile />} />
+                <Route path="/update" element={!isLogged ? <HomePage /> : <Update />} />
             </Routes>
         </Router>
     );

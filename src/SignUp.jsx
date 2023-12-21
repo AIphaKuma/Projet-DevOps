@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import {useNavigate} from "react-router-dom";
 
+import Footer from './Footer';
+
 function SignUp() {
     const [lastname, setLastname] = useState('');
     const [firstname, setFirstname] = useState('');
