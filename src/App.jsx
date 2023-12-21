@@ -53,7 +53,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
-                <Route path="/confirmsignup" element={!isLogged ? <HomePage /> : <ConfirmSignUp />} />
+                <Route path="/confirmsignup" element={<ConfirmSignUp />} />
                 <Route path="/profile" element={!isLogged ? <HomePage /> : <Profile />} />
                 <Route path="/update" element={!isLogged ? <HomePage /> : <Update />} />
             </Routes>
