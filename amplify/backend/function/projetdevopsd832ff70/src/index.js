@@ -1,7 +1,9 @@
 const awsServerlessExpress = require('aws-serverless-express');
 const app = require('./app');
 const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
+
 /**
  * @type {import('http').Server}
  */
@@ -11,25 +13,41 @@ const server = awsServerlessExpress.createServer(app);
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 exports.handler = async (event) => {
-  const { id, email, name, family_name } = JSON.parse(event.body);
+  console.log("Evénement reçu:", JSON.stringify(event, null, 2));
 
-  const userData = {
-    TableName: "userbis-env",
-    Key: { id },
-    UpdateExpression: "set username = :u, family_name = :f, name = :u",
-    ExpressionAttributeValues: {
-      ":u": email,  // Je suppose que 'username' dans DynamoDB est utilisé pour stocker l'email
-      ":f": family_name,
-      ":n": name
-    },
-    ReturnValues: "UPDATED_NEW"
-  };
+  for (const record of event.Records) {
+    const bucket = record.s3.bucket.name;
+    const key = record.s3.object.key;
 
-  try {
-    await dynamoDB.update(userData).promise();
-    return { statusCode: 200, body: JSON.stringify("Mise à jour réussie") };
-  } catch (err) {
-    console.error("Erreur lors de la mise à jour dans DynamoDB:", err);
-    return { statusCode: 500, body: JSON.stringify("Erreur lors de la mise à jour") };
+    try {
+      // Télécharger le fichier dans S3
+      const uploadParams = {
+        Bucket: bucket,
+        Key: key,
+        Body: record.body
+      };
+      await s3.putObject(uploadParams).promise();
+      console.log('Upload réussi');
+
+      // Construire l'URL de l'image
+      const imageUrl = `https://${bucket}.s3.amazonaws.com/${key}`;
+
+      // Mettre à jour DynamoDB avec l'URL de l'image
+      const userId = event.request.userAttributes.sub // Récupérer l'ID de l'utilisateur
+      const updateParams = {
+        TableName: 'usersbis-env',
+        Key: { 'id': userId },
+        UpdateExpression: 'set imageUrl = :url',
+        ExpressionAttributeValues: {
+          ':url': imageUrl
+        },
+        ReturnValues: 'UPDATED_NEW'
+      };
+      await dynamoDB.update(updateParams).promise();
+      console.log('Mise à jour de DynamoDB réussie');
+
+    } catch (err) {
+      console.error('Erreur lors de l\'upload ou de la mise à jour DynamoDB:', err);
+    }
   }
 };

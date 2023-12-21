@@ -1,7 +1,13 @@
 import './App.css'
 import React, { useState, useEffect } from 'react';
 import { Auth, API } from 'aws-amplify';
+import AWS from 'aws-sdk';
 
+AWS.config.update({
+    accessKeyId: 'AKIAQOF3XFDLMNORKZSQ',
+    secretAccessKey: '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',
+    region: 'eu-west-1'
+});
 
 function Update() {
     const [id, setId] = useState('');
@@ -12,6 +18,9 @@ function Update() {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [error, setError] = useState('');
+
+    const s3 = new AWS.S3();
+
     console.log(id);
         useEffect(() => {
         Auth.currentAuthenticatedUser()
@@ -62,6 +71,27 @@ function Update() {
         }
     };
 
+    const handleFileInput = async (e) => {
+        const file = e.target.files[0];
+        const fileName = `avatar/${user.attributes.sub}/${file.name}`;
+
+        // Configurer les paramètres d'upload
+        const uploadParams = {
+            Bucket: 'projetdevopsfa74cd2062494b94a7ca4ad5e10ed47a113214-env',
+            Key: fileName,
+            Body: file,
+        };
+
+
+        try {
+            await s3.putObject(uploadParams).promise();
+            const imageUrl = `https://${uploadParams.Bucket}.s3.amazonaws.com/${fileName}`;
+            console.log(fileName);
+            console.log('Upload réussi');
+        } catch (err) {
+            console.error('Erreur lors de l\'upload:', err);
+        }
+    };
 
     if (error) return <p>{error}</p>;
 
@@ -80,7 +110,8 @@ function Update() {
                                                htmlFor="file_input">Avatar</label>
                                         <input
                                             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 py-2"
-                                            id="file_input" type="file"></input>
+                                            id="file_input" type="file" onChange={handleFileInput}
+                                        ></input>
                                     </div>
                                     <div className="sm:col-span-2">
                                         <label htmlFor="lastname"

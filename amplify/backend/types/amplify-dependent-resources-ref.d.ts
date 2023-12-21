@@ -52,6 +52,10 @@ export type AmplifyDependentResourcesAttributes = {
       "SortKeyType": "string",
       "StreamArn": "string"
     },
+    "s39d93a7ed": {
+      "BucketName": "string",
+      "Region": "string"
+    },
     "usersbis": {
       "Arn": "string",
       "Name": "string",

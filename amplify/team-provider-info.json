@@ -57,7 +57,7 @@
         },
         "projetdevopsd832ff70": {
           "deploymentBucketName": "amplify-projetdevops-env-113214-deployment",
-          "s3Key": "amplify-builds/projetdevopsd832ff70-674b6a49376655416362-build.zip"
+          "s3Key": "amplify-builds/projetdevopsd832ff70-666a2b6d746e2f787948-build.zip"
         }
       },
       "api": {
@@ -65,7 +65,8 @@
       },
       "storage": {
         "dynamoffbc75dd": {},
-        "usersbis": {}
+        "usersbis": {},
+        "s39d93a7ed": {}
       }
     }
   },

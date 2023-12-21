@@ -171,6 +171,21 @@
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     },
+    "s39d93a7ed": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
+          ],
+          "category": "function",
+          "resourceName": "projetdevopsd832ff70"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    },
     "usersbis": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
